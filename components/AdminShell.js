@@ -6,12 +6,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { logoutAction } from '@/app/actions/auth';
 
-// Iconos de línea (mismo estilo que el Organizador / estudio.html).
+// Iconos de línea del panel.
 const ICONS = {
   home: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
   bag: '<path d="M6 8h12l1 12H5L6 8zM9 8a3 3 0 0 1 6 0"/>',
   layers: '<path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 16.5l9 5 9-5"/>',
-  wand: '<path d="M5 19L15 9M14 3.5l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8zM19.5 11l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   logout: '<path d="M15 4h4v16h-4M11 8l-4 4 4 4M7 12h9"/>',
 };
@@ -37,8 +36,6 @@ const NAV = [
   { sep: 'Catálogo' },
   { href: '/productos', label: 'Productos', icon: 'bag' },
   { href: '/categorias', label: 'Categorías', icon: 'layers' },
-  { sep: 'Herramientas' },
-  { href: '/estudio.html', label: 'Organizador', icon: 'wand', external: true },
 ];
 
 function isActive(pathname, item) {
@@ -124,11 +121,7 @@ export default function AdminShell({ userEmail, children }) {
                 {item.label}
               </>
             );
-            return item.external ? (
-              <a key={item.href} href={item.href} onClick={close} className={cls}>
-                {inner}
-              </a>
-            ) : (
+            return (
               <Link key={item.href} href={item.href} onClick={close} className={cls}>
                 {inner}
               </Link>

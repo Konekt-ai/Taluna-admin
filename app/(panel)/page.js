@@ -7,7 +7,7 @@ import { BarChart, AreaChart } from '@/components/Charts';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Inicio · Taluna Admin' };
 
-// Tarjeta de métrica al estilo .stat del Organizador.
+// Tarjeta de métrica.
 function Stat({ label, value, hint, tone }) {
   const card =
     tone === 'alert'
@@ -48,12 +48,12 @@ export default async function DashboardPage() {
           >
             Ver productos
           </Link>
-          <a
-            href="/estudio.html"
+          <Link
+            href="/productos/nuevo"
             className="inline-flex items-center gap-2 rounded-full border border-camel bg-camel px-4 py-2.5 text-sm font-bold text-white transition hover:bg-camelD"
           >
-            Abrir Organizador
-          </a>
+            Nuevo producto
+          </Link>
         </div>
       </div>
 
