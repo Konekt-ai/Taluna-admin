@@ -13,10 +13,10 @@ function Toggle({ action, id, current, onLabel, offLabel }) {
       <input type="hidden" name="value" value={(!current).toString()} />
       <button
         type="submit"
-        className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
+        className={`rounded-full px-2.5 py-1 text-xs font-bold transition ${
           current
-            ? 'border-ok/40 bg-ok/15 text-ok hover:bg-ok/25'
-            : 'border-line bg-cream text-muted hover:bg-line/40'
+            ? 'bg-okBg text-ok hover:brightness-95'
+            : 'border border-line bg-white text-muted hover:bg-cream'
         }`}
       >
         {current ? onLabel : offLabel}
@@ -28,23 +28,23 @@ function Toggle({ action, id, current, onLabel, offLabel }) {
 export default function ProductsTable({ products }) {
   if (!products.length) {
     return (
-      <div className="rounded-card border border-dashed border-line p-10 text-center text-muted">
+      <div className="rounded-card border border-dashed border-line bg-cream p-10 text-center text-muted">
         Aún no hay productos. Crea el primero con el botón “Nuevo producto”.
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-card border border-line">
+    <div className="overflow-x-auto rounded-card border border-line bg-white shadow-softSm">
       <table className="w-full border-collapse text-sm">
         <thead>
-          <tr className="border-b border-line bg-sand/70 text-left text-muted">
-            <th className="px-4 py-3 font-medium">Producto</th>
-            <th className="px-4 py-3 font-medium">Categoría</th>
-            <th className="px-4 py-3 font-medium">Precio</th>
-            <th className="px-4 py-3 font-medium">Stock</th>
-            <th className="px-4 py-3 font-medium">Destacado</th>
-            <th className="px-4 py-3 font-medium">Publicado</th>
+          <tr className="border-b border-line bg-cream text-left text-[0.72rem] font-bold uppercase tracking-wide text-muted">
+            <th className="px-4 py-3">Producto</th>
+            <th className="px-4 py-3">Categoría</th>
+            <th className="px-4 py-3">Precio</th>
+            <th className="px-4 py-3">Stock</th>
+            <th className="px-4 py-3">Destacado</th>
+            <th className="px-4 py-3">Publicado</th>
             <th className="px-4 py-3" />
           </tr>
         </thead>
@@ -52,15 +52,15 @@ export default function ProductsTable({ products }) {
           {products.map((p) => {
             const low = p.total_stock <= LOW_STOCK_THRESHOLD;
             return (
-              <tr key={p.id} className="border-b border-line/70 last:border-0 hover:bg-sand/40">
+              <tr key={p.id} className="border-b border-lineSoft last:border-0 hover:bg-cream">
                 <td className="px-4 py-3">
-                  <Link href={`/productos/${p.id}`} className="font-medium text-ink hover:text-wine">
+                  <Link href={`/productos/${p.id}`} className="font-semibold text-ink hover:text-burg">
                     {p.name}
                   </Link>
                   <div className="text-xs text-muted">/{p.slug}</div>
                 </td>
                 <td className="px-4 py-3 text-muted">{p.category_name}</td>
-                <td className="px-4 py-3">{formatPrice(p.price, p.currency)}</td>
+                <td className="px-4 py-3 font-semibold text-ink">{formatPrice(p.price, p.currency)}</td>
                 <td className="px-4 py-3">
                   <Badge tone={p.total_stock === 0 ? 'danger' : low ? 'warn' : 'muted'}>
                     {formatNumber(p.total_stock)}
@@ -85,7 +85,7 @@ export default function ProductsTable({ products }) {
                   />
                 </td>
                 <td className="px-4 py-3 text-right">
-                  <Link href={`/productos/${p.id}`} className="text-sm text-accent hover:underline">
+                  <Link href={`/productos/${p.id}`} className="text-sm font-semibold text-accent hover:underline">
                     Editar
                   </Link>
                 </td>

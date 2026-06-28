@@ -29,12 +29,12 @@ export default function ProductForm({ action, categories = [], product = null, s
       {product?.id && <input type="hidden" name="id" value={product.id} />}
 
       {state.error && (
-        <div className="rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+        <div className="rounded-xl bg-dangerBg px-4 py-3 text-sm font-semibold text-danger">
           {state.error}
         </div>
       )}
       {state.ok && (
-        <div className="rounded-xl border border-ok/30 bg-ok/10 px-4 py-3 text-sm text-ok">
+        <div className="rounded-xl bg-okBg px-4 py-3 text-sm font-semibold text-ok">
           {state.ok}
         </div>
       )}
@@ -60,7 +60,7 @@ export default function ProductForm({ action, categories = [], product = null, s
               <button
                 type="button"
                 onClick={() => setSlug(slugify(name))}
-                className="shrink-0 rounded-xl border border-line px-3 text-sm text-muted hover:bg-sand"
+                className="shrink-0 rounded-xl border border-line px-3 text-sm text-muted transition hover:bg-cream"
                 title="Generar desde el nombre"
               >
                 Auto
@@ -123,11 +123,11 @@ export default function ProductForm({ action, categories = [], product = null, s
       <Card>
         <div className="flex flex-wrap gap-6">
           <label className="flex items-center gap-2 text-sm text-ink">
-            <input type="checkbox" name="is_published" defaultChecked={v.is_published ?? false} className="h-4 w-4 accent-wine" />
+            <input type="checkbox" name="is_published" defaultChecked={v.is_published ?? false} className="h-4 w-4 accent-camel" />
             Publicado (visible en la tienda)
           </label>
           <label className="flex items-center gap-2 text-sm text-ink">
-            <input type="checkbox" name="is_featured" defaultChecked={v.is_featured ?? false} className="h-4 w-4 accent-wine" />
+            <input type="checkbox" name="is_featured" defaultChecked={v.is_featured ?? false} className="h-4 w-4 accent-camel" />
             Destacado (aparece en el inicio)
           </label>
         </div>

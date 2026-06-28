@@ -10,7 +10,7 @@ export default function ImagesEditor({ productId, productSlug, images = [] }) {
       ) : (
         <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {images.map((img) => (
-            <div key={img.id} className="overflow-hidden rounded-xl border border-line bg-cream">
+            <div key={img.id} className="overflow-hidden rounded-card border border-line bg-white">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.url}
@@ -54,10 +54,10 @@ export default function ImagesEditor({ productId, productSlug, images = [] }) {
       )}
 
       {/* Subir nueva foto */}
-      <form className="rounded-xl border border-dashed border-line bg-cream/60 p-4">
+      <form className="rounded-card border border-dashed border-line bg-cream p-4">
         <input type="hidden" name="product_id" value={productId} />
         <input type="hidden" name="product_slug" value={productSlug} />
-        <p className="mb-2 text-sm font-medium text-ink">Subir foto</p>
+        <p className="mb-2 font-display text-sm font-semibold text-charcoal">Subir foto</p>
         <p className="mb-3 text-xs text-muted">
           Recomendado: proporción <strong>4:5 vertical</strong>, mínimo <strong>900px</strong> de ancho. JPG o PNG.
         </p>
@@ -67,7 +67,7 @@ export default function ImagesEditor({ productId, productSlug, images = [] }) {
             name="file"
             accept="image/*"
             required
-            className="text-sm text-ink file:mr-3 file:rounded-full file:border-0 file:bg-wine file:px-3 file:py-1.5 file:text-cream"
+            className="text-sm text-ink file:mr-3 file:rounded-full file:border-0 file:bg-camel file:px-3 file:py-1.5 file:text-white"
           />
           <Input name="alt" placeholder="Texto alternativo (opcional)" className="max-w-xs" />
           <SubmitButton pendingText="Subiendo…">Subir</SubmitButton>

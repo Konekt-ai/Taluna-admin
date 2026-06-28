@@ -7,18 +7,23 @@ import { BarChart, AreaChart } from '@/components/Charts';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Inicio · Taluna Admin' };
 
-function Metric({ label, value, hint, tone, accent }) {
+// Tarjeta de métrica al estilo .stat del Organizador.
+function Stat({ label, value, hint, tone }) {
+  const card =
+    tone === 'alert'
+      ? 'bg-warnBg'
+      : tone === 'good'
+        ? 'bg-okBg'
+        : 'bg-white border border-line';
+  const num =
+    tone === 'alert' ? 'text-warn' : tone === 'good' ? 'text-ok' : 'text-charcoal';
+  const lab = tone === 'alert' ? 'text-[#9a6b1f]' : tone === 'good' ? 'text-[#2f5e43]' : 'text-muted';
   return (
-    <Card className="relative overflow-hidden">
-      {/* franja de acento lateral para dar carácter a cada métrica */}
-      <span
-        className="absolute inset-y-0 left-0 w-1"
-        style={{ backgroundColor: accent || 'var(--color-wine)' }}
-      />
-      <p className="text-sm text-muted">{label}</p>
-      <p className={`mt-1 text-3xl font-semibold ${tone || 'text-ink'}`}>{value}</p>
-      {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
-    </Card>
+    <div className={`relative overflow-hidden rounded-card p-[18px] shadow-softSm ${card}`}>
+      <div className={`font-display text-[2.2rem] leading-none ${num}`}>{value}</div>
+      <div className={`mt-1.5 text-[0.8rem] font-semibold ${lab}`}>{label}</div>
+      {hint && <div className="mt-0.5 text-[0.72rem] text-muted">{hint}</div>}
+    </div>
   );
 }
 
@@ -27,56 +32,58 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="font-display text-2xl text-ink">Resumen del inventario</h1>
-        <p className="text-sm text-muted">Una mirada rápida a tu catálogo y existencias.</p>
+      {/* Hero cálido */}
+      <div className="mb-5 rounded-xl2 border border-line bg-gradient-to-br from-white to-bgSoft p-6 shadow-soft md:p-7">
+        <span className="eyebrow">Resumen del inventario</span>
+        <h1 className="mt-2 font-display text-[clamp(1.7rem,5vw,2.5rem)] leading-[1.05] text-charcoal">
+          Tu catálogo, de un vistazo
+        </h1>
+        <p className="mt-1.5 max-w-[54ch] text-muted">
+          Una mirada rápida a tus productos y existencias. Todo lo del catálogo vive aquí.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2.5">
+          <Link
+            href="/productos"
+            className="inline-flex items-center gap-2 rounded-full border border-charcoal bg-charcoal px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1e1b17]"
+          >
+            Ver productos
+          </Link>
+          <a
+            href="/estudio.html"
+            className="inline-flex items-center gap-2 rounded-full border border-camel bg-camel px-4 py-2.5 text-sm font-bold text-white transition hover:bg-camelD"
+          >
+            Abrir Organizador
+          </a>
+        </div>
       </div>
 
       {/* Métricas principales */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Metric
-          label="Productos"
-          value={formatNumber(d.totalProducts)}
-          hint={`${d.publishedProducts} publicados`}
-          accent="var(--color-wine)"
-        />
-        <Metric
-          label="Publicados"
-          value={formatNumber(d.publishedProducts)}
-          tone="text-ok"
-          accent="var(--color-ok)"
-        />
-        <Metric
-          label="Stock total"
-          value={formatNumber(d.stockTotal)}
-          hint="Piezas en todas las variantes"
-          accent="var(--color-accent)"
-        />
-        <Metric
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <Stat label="Productos" value={formatNumber(d.totalProducts)} hint={`${d.publishedProducts} publicados`} />
+        <Stat label="Publicados" value={formatNumber(d.publishedProducts)} tone="good" />
+        <Stat label="Stock total" value={formatNumber(d.stockTotal)} hint="En todas las variantes" />
+        <Stat
           label="Bajo stock"
           value={formatNumber(d.lowStockCount)}
-          tone={d.lowStockCount ? 'text-warn' : 'text-ok'}
-          hint={`Productos con ${d.threshold} o menos`}
-          accent={d.lowStockCount ? 'var(--color-warn)' : 'var(--color-ok)'}
+          tone={d.lowStockCount ? 'alert' : 'good'}
+          hint={`${d.threshold} o menos`}
         />
       </div>
 
       {/* Valor del inventario — banner destacado */}
-      <div className="mt-4">
-        <Card className="relative overflow-hidden bg-wine/5">
+      <div className="mt-3">
+        <div className="rounded-card border border-line bg-burgBg p-5 shadow-softSm">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-sm text-muted">Valor estimado del inventario</p>
-              <p className="mt-1 font-display text-4xl text-wine">
+              <p className="text-sm font-semibold text-muted">Valor estimado del inventario</p>
+              <p className="mt-1 font-display text-[2.4rem] leading-none text-burg">
                 {formatPrice(d.inventoryValue)}
               </p>
-              <p className="mt-1 text-xs text-muted">
-                Suma de precio × stock de cada variante.
-              </p>
+              <p className="mt-1.5 text-xs text-muted">Suma de precio × stock de cada variante.</p>
             </div>
             <div className="text-right">
-              <p className="text-sm text-muted">Catálogo</p>
-              <p className="mt-1 text-lg font-semibold text-ink">
+              <p className="text-sm font-semibold text-muted">Catálogo</p>
+              <p className="mt-1 text-lg font-bold text-ink">
                 {formatNumber(d.totalProducts)} productos
               </p>
               <p className="text-xs text-muted">
@@ -84,7 +91,7 @@ export default async function DashboardPage() {
               </p>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
 
       {/* Gráficas */}
@@ -109,8 +116,8 @@ export default async function DashboardPage() {
       <div className="mt-4">
         <Card>
           <div className="mb-3 flex items-center justify-between">
-            <p className="font-medium text-ink">Productos con bajo stock</p>
-            <Link href="/productos" className="text-sm text-accent hover:underline">
+            <p className="font-display text-lg text-charcoal">Productos con bajo stock</p>
+            <Link href="/productos" className="text-sm font-semibold text-accent hover:underline">
               Ver todos
             </Link>
           </div>
@@ -118,13 +125,13 @@ export default async function DashboardPage() {
           {d.lowStock.length === 0 ? (
             <p className="text-sm text-muted">Todo en orden, ningún producto bajo el mínimo. 🎉</p>
           ) : (
-            <ul className="divide-y divide-line">
+            <ul className="divide-y divide-lineSoft">
               {d.lowStock.map((p) => (
                 <li key={p.id} className="flex items-center justify-between py-2.5">
                   <div className="min-w-0">
                     <Link
                       href={`/productos/${p.id}`}
-                      className="truncate font-medium text-ink hover:text-wine"
+                      className="truncate font-semibold text-ink hover:text-burg"
                     >
                       {p.name}
                     </Link>

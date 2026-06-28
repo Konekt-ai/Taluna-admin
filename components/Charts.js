@@ -4,12 +4,12 @@ import { Card } from '@/components/ui';
 
 // Paleta de marca para series (se cicla si hay más categorías que colores).
 const SERIES = [
-  'var(--color-wine)',
-  'var(--color-accent)',
+  'var(--color-burg)',
+  'var(--color-camel)',
   'var(--color-ok)',
   'var(--color-warn)',
-  'var(--color-wine-soft)',
-  'var(--color-ink)',
+  'var(--color-camel-d)',
+  'var(--color-ink-2)',
 ];
 
 // Cabecera común de las gráficas (título, subtítulo y distintivo opcional).
@@ -54,7 +54,7 @@ export function BarChart({ title, subtitle, note, data, formatValue = (v) => v }
                     {formatValue(d.value)}
                   </span>
                 </div>
-                <div className="h-2.5 w-full overflow-hidden rounded-full bg-line/50">
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-lineSoft">
                   <div
                     className="h-full rounded-full transition-all"
                     style={{ width: `${Math.max(pct, 2)}%`, backgroundColor: color }}
@@ -218,8 +218,8 @@ export function AreaChart({ title, subtitle, note, data, formatValue = (v) => v 
           >
             <defs>
               <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--color-wine)" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="var(--color-wine)" stopOpacity="0.02" />
+                <stop offset="0%" stopColor="var(--color-camel)" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="var(--color-camel)" stopOpacity="0.02" />
               </linearGradient>
             </defs>
 
@@ -241,7 +241,7 @@ export function AreaChart({ title, subtitle, note, data, formatValue = (v) => v 
             <path
               d={line}
               fill="none"
-              stroke="var(--color-wine)"
+              stroke="var(--color-camel)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -249,7 +249,7 @@ export function AreaChart({ title, subtitle, note, data, formatValue = (v) => v 
 
             {pts.map((p, i) => (
               <g key={data[i].label}>
-                <circle cx={p[0]} cy={p[1]} r="4" fill="var(--color-cream)" stroke="var(--color-wine)" strokeWidth="2.5" />
+                <circle cx={p[0]} cy={p[1]} r="4" fill="#fff" stroke="var(--color-camel)" strokeWidth="2.5" />
                 <text x={p[0]} y={p[1] - 10} textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--color-ink)">
                   {data[i].value}
                 </text>

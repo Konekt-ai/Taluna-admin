@@ -11,12 +11,14 @@ export default async function NuevoProductoPage() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="mb-5">
-        <Link href="/productos" className="text-sm text-accent hover:underline">
+      <div className="mb-6">
+        <Link href="/productos" className="text-sm font-semibold text-accent hover:underline">
           ← Volver a productos
         </Link>
-        <h1 className="mt-2 font-display text-2xl text-ink">Nuevo producto</h1>
-        <p className="text-sm text-muted">
+        <h1 className="mt-2 font-display text-[clamp(1.6rem,4vw,2.1rem)] leading-tight text-charcoal">
+          Nuevo producto
+        </h1>
+        <p className="mt-1 text-sm text-muted">
           Después de crearlo podrás agregar variantes (colores y stock) y fotos.
         </p>
       </div>

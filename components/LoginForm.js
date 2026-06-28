@@ -11,7 +11,7 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-4">
       {state?.error && (
-        <div className="rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+        <div className="rounded-xl bg-dangerBg px-4 py-3 text-sm font-semibold text-danger">
           {state.error}
         </div>
       )}

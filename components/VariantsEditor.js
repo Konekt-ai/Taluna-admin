@@ -9,7 +9,7 @@ import { LOW_STOCK_THRESHOLD } from '@/lib/slug';
 function VariantRow({ productId, variant }) {
   const low = (variant.stock ?? 0) <= LOW_STOCK_THRESHOLD;
   return (
-    <form className="grid grid-cols-2 items-end gap-2 border-b border-line/60 py-3 sm:grid-cols-12">
+    <form className="grid grid-cols-2 items-end gap-2 border-b border-lineSoft py-3 sm:grid-cols-12">
       <input type="hidden" name="id" value={variant.id} />
       <input type="hidden" name="product_id" value={productId} />
 
@@ -43,7 +43,7 @@ function VariantRow({ productId, variant }) {
       </label>
 
       <label className="col-span-1 flex items-center gap-2 pb-2 sm:col-span-1">
-        <input type="checkbox" name="is_active" defaultChecked={variant.is_active ?? true} className="h-4 w-4 accent-wine" />
+        <input type="checkbox" name="is_active" defaultChecked={variant.is_active ?? true} className="h-4 w-4 accent-camel" />
         <span className="text-xs text-muted">Activa</span>
       </label>
 
@@ -78,7 +78,7 @@ export default function VariantsEditor({ productId, variants = [] }) {
       )}
 
       {/* Fila para AGREGAR nueva variante */}
-      <form className="mt-4 grid grid-cols-2 items-end gap-2 rounded-xl bg-cream/60 p-3 sm:grid-cols-12">
+      <form className="mt-4 grid grid-cols-2 items-end gap-2 rounded-card border border-lineSoft bg-cream p-3 sm:grid-cols-12">
         <input type="hidden" name="product_id" value={productId} />
         <label className="col-span-1 sm:col-span-3">
           <span className="mb-1 block text-xs text-muted">Nombre</span>
@@ -97,11 +97,11 @@ export default function VariantsEditor({ productId, variants = [] }) {
           <Input name="price_override" type="number" min="0" step="1" placeholder="—" />
         </label>
         <label className="col-span-1 flex items-center gap-2 pb-2 sm:col-span-1">
-          <input type="checkbox" name="is_active" defaultChecked className="h-4 w-4 accent-wine" />
+          <input type="checkbox" name="is_active" defaultChecked className="h-4 w-4 accent-camel" />
           <span className="text-xs text-muted">Activa</span>
         </label>
         <div className="col-span-1 sm:col-span-1">
-          <SubmitButton formAction={addVariant} className="px-3 py-1.5" pendingText="…">
+          <SubmitButton formAction={addVariant} variant="camel" className="px-3 py-1.5" pendingText="…">
             Agregar
           </SubmitButton>
         </div>

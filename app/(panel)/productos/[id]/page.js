@@ -27,10 +27,10 @@ export default async function EditarProductoPage({ params }) {
     <div className="mx-auto max-w-3xl">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
-          <Link href="/productos" className="text-sm text-accent hover:underline">
+          <Link href="/productos" className="text-sm font-semibold text-accent hover:underline">
             ← Volver a productos
           </Link>
-          <h1 className="mt-2 font-display text-2xl text-ink">{product.name}</h1>
+          <h1 className="mt-2 font-display text-2xl text-charcoal">{product.name}</h1>
           <p className="text-sm text-muted">/{product.slug}</p>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default async function EditarProductoPage({ params }) {
 
       {/* Variantes y stock */}
       <section className="mt-8">
-        <h2 className="mb-1 font-display text-xl text-ink">Variantes y stock</h2>
+        <h2 className="mb-1 font-display text-xl text-charcoal">Variantes y stock</h2>
         <p className="mb-3 text-sm text-muted">
           Colores u opciones del producto. Aquí controlas las existencias.
         </p>
@@ -56,7 +56,7 @@ export default async function EditarProductoPage({ params }) {
 
       {/* Imágenes */}
       <section className="mt-8">
-        <h2 className="mb-1 font-display text-xl text-ink">Fotos</h2>
+        <h2 className="mb-1 font-display text-xl text-charcoal">Fotos</h2>
         <p className="mb-3 text-sm text-muted">
           La primera (orden más bajo) es la principal en el catálogo.
         </p>
@@ -71,11 +71,11 @@ export default async function EditarProductoPage({ params }) {
 
       {/* Zona peligrosa */}
       <section className="mt-8">
-        <Card className="border-danger/30 bg-danger/5">
+        <Card className="border-dangerBg bg-dangerBg">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="font-medium text-ink">Eliminar producto</p>
-              <p className="text-sm text-muted">
+              <p className="font-display text-lg text-danger">Eliminar producto</p>
+              <p className="text-sm text-[#8a3a43]">
                 Se borran también sus variantes e imágenes. Esta acción no se puede deshacer.
               </p>
             </div>
