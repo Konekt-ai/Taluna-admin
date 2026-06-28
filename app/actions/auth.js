@@ -13,10 +13,14 @@ export async function loginAction(prevState, formData) {
     return { error: 'Escribe tu correo y contraseña.' };
   }
 
-  const allowed = process.env.ADMIN_EMAIL;
-  if (allowed && email.toLowerCase() !== allowed.toLowerCase()) {
-    return { error: 'Esta cuenta no tiene acceso al panel.' };
-  }
+  // TEMPORAL: restricción por correo DESACTIVADA para que cualquier cuenta
+  // creada en Supabase pueda iniciar sesión (así el cliente no tiene problemas).
+  // Para volver a restringir a un solo correo: define ADMIN_EMAIL en .env.local
+  // y descomenta estas líneas.
+  // const allowed = process.env.ADMIN_EMAIL;
+  // if (allowed && email.toLowerCase() !== allowed.toLowerCase()) {
+  //   return { error: 'Esta cuenta no tiene acceso al panel.' };
+  // }
 
   const supabase = createSupabaseServer();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
